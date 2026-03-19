@@ -14,7 +14,7 @@ export default function Allproducts({ product }: AllproductProps) {
             Products
           </h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6">
-            {product.map((el, index) => (
+            {product.map((el, index:number) => (
               <ProductCard key={el._id ?? index} product={el} />
             ))}
           </div>
