@@ -1,9 +1,8 @@
-import Image from "next/image";
+import Allproducts from "./_components/Allproducts/page";
+import { fetchAllProducts } from "./_api/fetchProd";
 
-export default function Home() {
-  return (
-    <>
-      <h1>jello</h1>
-    </>
-  );
+export default async function Home() {
+  const product = await fetchAllProducts();
+
+  return <Allproducts product={product} />;
 }

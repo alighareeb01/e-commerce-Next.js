@@ -310,7 +310,7 @@ export default function Navbar() {
                 <NavItem href="/product">Products</NavItem>
               </li>
               <li>
-                <NavItem href="/category">Categories</NavItem>
+                <NavItem href="/Category">Categories</NavItem>
               </li>
               <li>
                 <NavItem href="/brands">Brands</NavItem>

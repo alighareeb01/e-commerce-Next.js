@@ -1,4 +1,5 @@
 export interface ProductType {
+  _id?: string;
   title: string;
   price: number;
   description: string;
@@ -6,6 +7,6 @@ export interface ProductType {
   category: string;
   subCategory: string;
   brand: string;
-  imageCover?: File;
-  images?: File[];
+  imageCover?: string | File;
+  images?: Array<string | File>;
 }

@@ -11,7 +11,10 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "lucide-react";
 
-export default function ProductCard({ product }: ProductType) {
+type ProductCardProps = {
+  product: ProductType;
+};
+export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Card className="relative mx-auto w-full max-w-sm border border-cyan-400/20 bg-slate-950 pt-0 text-slate-100 shadow-lg shadow-black/30">
       <div className="absolute inset-0 z-30 aspect-video bg-slate-950/30" />
