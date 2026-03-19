@@ -1,8 +1,10 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { log } from "util";
 import { z } from "zod";
 
 const loginSchema = z.object({
@@ -13,10 +15,8 @@ const loginSchema = z.object({
     .max(50, "Password must be at most 50 characters"),
 });
 
-type LoginFormData = z.infer<typeof loginSchema>;
-
 export default function Login() {
-  const { register, handleSubmit, formState } = useForm<LoginFormData>({
+  const { register, handleSubmit, formState } = useForm({
     defaultValues: {
       email: "",
       password: "",
@@ -24,8 +24,19 @@ export default function Login() {
     resolver: zodResolver(loginSchema),
   });
 
-  function loginFun(data: LoginFormData) {
-    console.log(data);
+  async function loginFun(data) {
+    // console.log(data);
+    try {
+      const res = await axios.post(
+        "https://nti-ecommerce.vercel.app/api/v1/auth/signIn",
+        data,
+      );
+
+      console.log(res.data);
+      localStorage.setItem("loginToken", res.data.token);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
