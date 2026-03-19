@@ -2,9 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { log } from "util";
 import { z } from "zod";
 
 const loginSchema = z.object({
@@ -16,6 +15,7 @@ const loginSchema = z.object({
 });
 
 export default function Login() {
+  let [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState } = useForm({
     defaultValues: {
       email: "",
@@ -25,6 +25,7 @@ export default function Login() {
   });
 
   async function loginFun(data) {
+    setIsLoading(true);
     // console.log(data);
     try {
       const res = await axios.post(
@@ -34,8 +35,10 @@ export default function Login() {
 
       console.log(res.data);
       localStorage.setItem("loginToken", res.data.token);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err.response?.data || err.message);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -47,7 +50,6 @@ export default function Login() {
         </h2>
 
         <form onSubmit={handleSubmit(loginFun)} className="flex flex-col gap-4">
-          {/* Email */}
           <div className="flex flex-col gap-1">
             <label className="text-sm text-[#7b5843]">Email</label>
             <input
@@ -62,7 +64,6 @@ export default function Login() {
             )}
           </div>
 
-          {/* Password */}
           <div className="flex flex-col gap-1">
             <label className="text-sm text-[#7b5843]">Password</label>
             <input
@@ -77,12 +78,24 @@ export default function Login() {
             )}
           </div>
 
-          {/* Button */}
           <button
             type="submit"
-            className="mt-3 rounded-full bg-[#6d432d] py-2 text-[#fff5eb] shadow-md transition-all hover:bg-[#7b4f36] hover:-translate-y-0.5"
+            disabled={isLoading}
+            className={`mt-3 rounded-full py-2 text-[#fff5eb] shadow-md transition-all 
+  ${
+    isLoading
+      ? "bg-[#a18672] cursor-not-allowed"
+      : "bg-[#6d432d] hover:bg-[#7b4f36] hover:-translate-y-0.5"
+  }`}
           >
-            Login
+            {isLoading ? (
+              <span className="flex items-center justify-center gap-2">
+                <span className="w-4 h-4 border-2 border-[#fff5eb] border-t-transparent rounded-full animate-spin"></span>
+                loggin in...
+              </span>
+            ) : (
+              "login "
+            )}
           </button>
         </form>
       </div>
