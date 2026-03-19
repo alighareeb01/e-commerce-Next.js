@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -15,6 +16,7 @@ const loginSchema = z.object({
 });
 
 export default function Login() {
+  const router = useRouter();
   let [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState } = useForm({
     defaultValues: {
@@ -35,6 +37,7 @@ export default function Login() {
 
       console.log(res.data);
       localStorage.setItem("loginToken", res.data.token);
+      router.push("/shop");
     } catch (err) {
       console.log(err.response?.data || err.message);
     } finally {

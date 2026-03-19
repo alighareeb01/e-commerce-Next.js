@@ -5,7 +5,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { tr } from "zod/locales";
+import { useRouter } from "next/navigation";
 
 const signuPSchema = z.object({
   name: z.string().min(3, "at least 3 char").max(30, "max 30 char"),
@@ -17,6 +17,7 @@ const signuPSchema = z.object({
 });
 
 export default function register() {
+  const router = useRouter();
   let [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState } = useForm({
     defaultValues: {
@@ -38,6 +39,7 @@ export default function register() {
 
       console.log(res.data);
       localStorage.setItem("signupToken", res.data.token);
+      router.push("/login");
     } catch (err) {
       console.log(err.response?.data || err.message);
     } finally {
