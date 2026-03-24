@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ShoppingBag } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 const NavItem = ({
   href,
@@ -48,8 +48,7 @@ const NavItem = ({
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  let session = useSession();
-  console.log(session, "session from navbar");
+  const { status } = useSession();
 
   return (
     <nav className="sticky top-0 z-50 border-b border-[#7a5036]/15 bg-[rgba(250,240,228,0.92)] text-[#3f2417] shadow-[0_10px_35px_rgba(90,53,35,0.08)] backdrop-blur-xl supports-[backdrop-filter]:bg-[rgba(250,240,228,0.82)]">
@@ -89,9 +88,12 @@ export default function Navbar() {
               <li>
                 <NavItem href="/wishlist">Wishlist</NavItem>
               </li>
-              <li>
-                <NavItem href="/cart">Cart</NavItem>
-              </li>
+
+              {status === "authenticated" && (
+                <li>
+                  <NavItem href="/cart">Cart</NavItem>
+                </li>
+              )}
             </ul>
           </div>
 
@@ -102,18 +104,29 @@ export default function Navbar() {
               <i className="fa-brands fa-twitter cursor-pointer transition-colors hover:text-[#6d432d]" />
             </div>
             <div className="hidden lg:flex items-center gap-4 text-sm font-medium">
-              <Link
-                href="/login"
-                className="text-[#6f4b38] transition-colors hover:text-[#9b6b45]"
-              >
-                Login
-              </Link>
-              <Link
-                href="/register"
-                className="rounded-full border border-[#7a5036]/10 bg-[#6d432d] px-4 py-2 text-[#fff5eb] shadow-[0_12px_24px_rgba(90,53,35,0.18)] transition-all hover:-translate-y-0.5 hover:bg-[#7b4f36]"
-              >
-                Register
-              </Link>
+              {status === "authenticated" ? (
+                <button
+                  className="text-[#6f4b38] transition-colors hover:text-[#9b6b45]"
+                  onClick={() => signOut({ callbackUrl: "/login" })}
+                >
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className="text-[#6f4b38] transition-colors hover:text-[#9b6b45]"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="rounded-full border border-[#7a5036]/10 bg-[#6d432d] px-4 py-2 text-[#fff5eb] shadow-[0_12px_24px_rgba(90,53,35,0.18)] transition-all hover:-translate-y-0.5 hover:bg-[#7b4f36]"
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
             </div>
 
             <button
@@ -146,7 +159,7 @@ export default function Navbar() {
                 </NavItem>
               </li>
               <li>
-                <NavItem href="/categories" onClick={() => setIsOpen(false)}>
+                <NavItem href="/Category" onClick={() => setIsOpen(false)}>
                   Categories
                 </NavItem>
               </li>
@@ -165,29 +178,42 @@ export default function Navbar() {
                   Wishlist
                 </NavItem>
               </li>
-              {session.status === "authenticated" && (
+              {status === "authenticated" && (
                 <li>
                   <NavItem href="/cart" onClick={() => setIsOpen(false)}>
                     Cart
                   </NavItem>
                 </li>
               )}
-              <li className="flex flex-col gap-4 border-t border-[#7a5036]/12 pt-4">
-                <Link
-                  href="/login"
-                  className="text-[#6f4b38] transition-colors hover:text-[#9b6b45]"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Login
-                </Link>
-                <Link
-                  href="/register"
-                  className="rounded-full bg-[#6d432d] px-4 py-2 text-[#fff5eb] shadow-[0_12px_24px_rgba(90,53,35,0.18)] transition-colors hover:bg-[#7b4f36]"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Register
-                </Link>
-              </li>
+              {status === "authenticated" ? (
+                <li>
+                  <button
+                    onClick={() => {
+                      setIsOpen(false);
+                      signOut({ callbackUrl: "/login" });
+                    }}
+                  >
+                    Logout
+                  </button>
+                </li>
+              ) : (
+                <li className="flex flex-col gap-4 border-t border-[#7a5036]/12 pt-4">
+                  <Link
+                    href="/login"
+                    className="text-[#6f4b38] transition-colors hover:text-[#9b6b45]"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="rounded-full bg-[#6d432d] px-4 py-2 text-[#fff5eb] shadow-[0_12px_24px_rgba(90,53,35,0.18)] transition-colors hover:bg-[#7b4f36]"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Register
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>
