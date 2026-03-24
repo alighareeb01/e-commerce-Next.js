@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ShoppingBag } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 const NavItem = ({
   href,
@@ -47,6 +48,8 @@ const NavItem = ({
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  let session = useSession();
+  console.log(session, "session from navbar");
 
   return (
     <nav className="sticky top-0 z-50 border-b border-[#7a5036]/15 bg-[rgba(250,240,228,0.92)] text-[#3f2417] shadow-[0_10px_35px_rgba(90,53,35,0.08)] backdrop-blur-xl supports-[backdrop-filter]:bg-[rgba(250,240,228,0.82)]">
@@ -162,11 +165,13 @@ export default function Navbar() {
                   Wishlist
                 </NavItem>
               </li>
-              <li>
-                <NavItem href="/cart" onClick={() => setIsOpen(false)}>
-                  Cart
-                </NavItem>
-              </li>
+              {session.status === "authenticated" && (
+                <li>
+                  <NavItem href="/cart" onClick={() => setIsOpen(false)}>
+                    Cart
+                  </NavItem>
+                </li>
+              )}
               <li className="flex flex-col gap-4 border-t border-[#7a5036]/12 pt-4">
                 <Link
                   href="/login"

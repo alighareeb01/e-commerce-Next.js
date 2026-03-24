@@ -2,7 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { redirect, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -29,20 +30,37 @@ export default function Login() {
   async function loginFun(data) {
     setIsLoading(true);
     // console.log(data);
-    try {
-      const res = await axios.post(
-        "https://nti-ecommerce.vercel.app/api/v1/auth/signIn",
-        data,
-      );
 
-      console.log(res.data);
-      localStorage.setItem("loginToken", res.data.token);
+    let res = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+      callbackUrl: "/",
+    });
+    console.log(res.ok);
+    if (res.ok == true) {
       router.push("/shop");
-    } catch (err) {
-      console.log(err.response?.data || err.message);
-    } finally {
+      setIsLoading(false);
+    } else {
+      console.log(res, "res");
+      console.log(res.error, "res error");
       setIsLoading(false);
     }
+
+    // try {
+    //   const res = await axios.post(
+    //     "https://nti-ecommerce.vercel.app/api/v1/auth/signIn",
+    //     data,
+    //   );
+
+    //   console.log(res.data);
+    //   localStorage.setItem("loginToken", res.data.token);
+    //   router.push("/shop");
+    // } catch (err) {
+    //   console.log(err.response?.data || err.message);
+    // } finally {
+    //   setIsLoading(false);
+    // }
   }
 
   return (

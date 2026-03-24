@@ -4,8 +4,9 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "./_components/Navbar/page";
 import Footer from "./_components/Footer/page";
+import MySessionProvider from "./MySessionProvider/MySessionProvider";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,10 +33,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
+        <MySessionProvider>
+          <Navbar />
 
-        <div className="min-h-[170]">{children}</div>
-        <Footer />
+          <div className="min-h-[170]">{children}</div>
+          <Footer />
+        </MySessionProvider>
       </body>
     </html>
   );
