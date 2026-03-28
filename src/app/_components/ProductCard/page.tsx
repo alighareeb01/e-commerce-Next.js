@@ -11,8 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Heart } from "lucide-react";
-
-
+import AddToCardButton from "../AddToCardButton/AddToCardButton";
 
 type ProductCardProps = {
   product: ProductType;
@@ -55,9 +54,11 @@ export default function ProductCard({ product }: ProductCardProps) {
         </CardDescription>
       </CardHeader>
       <CardFooter className="relative z-20 border-t border-[#7a5036]/10 bg-[rgba(246,230,214,0.72)] p-5 gap-2">
-        <Button className="flex-1 bg-[#6d432d] text-[#fff5eb] shadow-[0_8px_20px_rgba(90,53,35,0.15)] hover:bg-[#7b4f36] hover:-translate-y-0.5 transition-all">
+        {/* <Button className="flex-1 bg-[#6d432d] text-[#fff5eb] shadow-[0_8px_20px_rgba(90,53,35,0.15)] hover:bg-[#7b4f36] hover:-translate-y-0.5 transition-all">
           Add to Cart
-        </Button>
+        </Button> */}
+
+        <AddToCardButton productId={product._id}>add to cart</AddToCardButton>
 
         <Button
           variant="outline"
