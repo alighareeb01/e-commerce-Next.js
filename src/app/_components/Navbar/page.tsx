@@ -154,7 +154,7 @@ export default function Navbar() {
                 </NavItem>
               </li>
               <li>
-                <NavItem href="/products" onClick={() => setIsOpen(false)}>
+                <NavItem href="/Products" onClick={() => setIsOpen(false)}>
                   Products
                 </NavItem>
               </li>

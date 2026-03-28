@@ -14,12 +14,13 @@ export const fetchAllProducts = async () => {
     },
   ];
   try {
-    const data = await fetch(
-      "https://nti-ecommerce.vercel.app/api/v1/products",
+    const res = await fetch(
+      "https://nti-e-commerce-backend-project.vercel.app/api/v1/product",
     );
-    const res = await data.json();
+    const data = await res.json();
+    console.log(data.data, "from here");
 
-    return res.Products || x;
+    return data.data || x;
   } catch (err) {
     console.log(err);
     return [];

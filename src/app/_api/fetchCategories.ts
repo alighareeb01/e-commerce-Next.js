@@ -6,12 +6,13 @@ export const fetchAllCategories = async () => {
     { name: "one", image: "asdasd", title: "asd" },
   ];
   try {
-    const data = await fetch(
-      "https://nti-ecommerce.vercel.app/api/v1/categories",
+    const res = await fetch(
+      "https://nti-e-commerce-backend-project.vercel.app/api/v1/category/",
     );
-    const res = await data.json();
+    const data = await res.json();
+    // console.log(data.data, "data cat");
 
-    return res.categories || categories;
+    return data.data || categories;
   } catch (err) {
     console.log(err);
     return [];

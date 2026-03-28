@@ -22,9 +22,8 @@ export const authOptions: NextAuthOptions = {
         password: {},
       },
       async authorize(credentials) {
-        //fetching
         const res = await fetch(
-          "https://nti-ecommerce.vercel.app/api/v1/auth/signIn",
+          "https://nti-e-commerce-backend-project.vercel.app/api/v1/auth/login",
           {
             method: "POST",
             headers: {
@@ -37,18 +36,18 @@ export const authOptions: NextAuthOptions = {
           },
         );
         const data = await res.json();
-        // return null;
-        let decodedToken = jwtDecode(data.token);
-        if (data.message == "success") {
-          //
-          return {
-            token: data.token,
-            user: decodedToken,
-            id: decodedToken.id,
-          };
-        } else {
-          throw new Error("invalid credientaiasd");
+
+        if (!res.ok || !data?.token) {
+          throw new Error(data?.message || data?.error || "Invalid credentials");
         }
+
+        const decodedToken = jwtDecode<DecodedToken>(data.token);
+
+        return {
+          token: data.token,
+          user: decodedToken,
+          id: decodedToken.id,
+        };
       },
     }),
   ],

@@ -14,6 +14,10 @@ const signuPSchema = z.object({
     .string()
     .min(6, "Password must be at least 6 characters")
     .max(50, "Password must be at most 50 characters"),
+  confirmPassword: z
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .max(50, "Password must be at most 50 characters"),
 });
 
 export default function register() {
@@ -33,9 +37,11 @@ export default function register() {
     // console.log(data);
     try {
       const res = await axios.post(
-        "https://nti-ecommerce.vercel.app/api/v1/auth/signUp",
+        "https://nti-e-commerce-backend-project.vercel.app/api/v1/auth/signup",
         data,
       );
+
+      // console.log(res);
 
       console.log(res.data);
       localStorage.setItem("signupToken", res.data.token);
@@ -96,6 +102,20 @@ export default function register() {
               {formState.errors.password && (
                 <p className="text-xs text-red-500">
                   {formState.errors.password.message}
+                </p>
+              )}
+            </div>
+            {/* confirmPassword */}
+            <div className="flex flex-col gap-1">
+              <label className="text-sm text-[#7b5843]">confirm Password</label>
+              <input
+                type="password"
+                className="rounded-lg border border-[#7a5036]/20 bg-[#fff5eb] px-3 py-2 outline-none focus:border-[#6d432d]"
+                {...register("confirmPassword")}
+              />
+              {formState.errors.confirmPassword && (
+                <p className="text-xs text-red-500">
+                  {formState.errors.confirmPassword.message}
                 </p>
               )}
             </div>

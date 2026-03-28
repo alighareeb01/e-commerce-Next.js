@@ -24,18 +24,18 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#4a2d1e]/55 via-transparent to-transparent opacity-80" />
 
       <img
-        src={product.imageCover}
-        alt={product.title}
+        src="/def.jpg"
+        alt={product.name}
         className="relative aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
       />
       <CardHeader className="relative z-20 gap-3 px-5 pt-5 flex-grow">
         <CardTitle className="text-2xl font-bold tracking-tight text-[#4a2d1e]">
-          {product.title}
+          {product.name}
         </CardTitle>
         <CardDescription className="text-sm text-[#7b5843] space-y-4">
           <div className="flex items-center justify-between">
             <p className="text-base font-semibold text-[#6d432d]">
-              ${product.priceAfterDiscount}
+              ${product.price}
             </p>
 
             <p className="text-sm line-through text-[#a58a7a]">
@@ -50,7 +50,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <div className="flex items-center justify-between text-xs text-[#7b5843]">
             <span>Stock: {product.stock}</span>
             <span>Sold: {product.sold}</span>
-            {product.ratingAvg && <span>⭐ {product.ratingAvg}</span>}
+            {product.ratingAverage && <span>⭐ {product.ratingAvg}</span>}
           </div>
         </CardDescription>
       </CardHeader>

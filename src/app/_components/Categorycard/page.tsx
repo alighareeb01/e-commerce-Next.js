@@ -19,7 +19,7 @@ export default function Categorycard({ category }: categoryProps) {
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#4a2d1e]/55 via-transparent to-transparent opacity-80" />
 
       <img
-        src={category.image}
+        src="/def.jpg"
         alt={category.name}
         className="relative aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
       />
