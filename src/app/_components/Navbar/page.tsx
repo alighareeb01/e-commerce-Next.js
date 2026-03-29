@@ -74,7 +74,7 @@ export default function Navbar() {
                 <NavItem href="/">Home</NavItem>
               </li>
               <li>
-                <NavItem href="/Products">Products</NavItem>
+                <NavItem href="/products">Products</NavItem>
               </li>
               <li>
                 <NavItem href="/Category">Categories</NavItem>
