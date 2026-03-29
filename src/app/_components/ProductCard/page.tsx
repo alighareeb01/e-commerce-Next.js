@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Heart } from "lucide-react";
 import AddToCardButton from "../AddToCardButton/AddToCardButton";
+import AddToWishlistButton from "../AddToWishlistButton/AddToWishlistButton";
 
 type ProductCardProps = {
   product: ProductType;
@@ -59,14 +60,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         </Button> */}
 
         <AddToCardButton productId={product._id}>add to cart</AddToCardButton>
-
-        <Button
-          variant="outline"
-          size="icon"
-          className="shrink-0 border border-[#7a5036]/20 text-[#6d432d] bg-[rgba(255,248,240,0.9)] hover:bg-[#f3e1d3] hover:text-[#7b4f36] hover:border-[#7a5036]/30 transition-all"
-        >
+        <AddToWishlistButton productId={product._id}>
           <Heart className="w-4 h-4" />
-        </Button>
+        </AddToWishlistButton>
       </CardFooter>
     </Card>
   );
