@@ -1,8 +1,11 @@
 import Allproducts from "./_components/Allproducts/page";
 import { fetchAllProducts } from "./_api/fetchProd";
+import Allcategories from "./_components/Allcategories/page";
+import { fetchAllCategories } from "./_api/fetchCategories";
 
 export default async function Home() {
   const product = await fetchAllProducts();
+  const category = await fetchAllCategories();
 
   return (
     <>
@@ -26,6 +29,7 @@ export default async function Home() {
       </section>
       <div className="min-h-screen bg-[linear-gradient(180deg,#fff8f0_0%,#f6eadf_52%,#efddcf_100%)] text-[#3f2417]">
         <Allproducts product={product} />
+        <Allcategories category={category} />
       </div>
     </>
   );

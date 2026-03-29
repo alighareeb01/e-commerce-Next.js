@@ -3,6 +3,8 @@ import CartCard from "../CartCard/page";
 import { Button } from "@/components/ui/button";
 import clearFromCartAction from "@/app/cartAction/clearFromCartAction";
 import ClearCartButton from "../ClearCartButton/ClearCartButton";
+import PlaceOrderButton from "../PlaceOrderButton/PlaceOrderButton";
+
 // import CartCard from "../CartCard/page";
 
 type CartCategoryType = {
@@ -50,6 +52,8 @@ type AllCartProps = {
 //   await clearFromCartAction();
 // }
 export default function page({ cart }: AllCartProps) {
+  console.log("cartId", cart._id);
+
   return (
     <div>
       <section className="py-4 pb-10 text-[#3f2417]">
@@ -89,6 +93,7 @@ export default function page({ cart }: AllCartProps) {
                   </p>
                 </div>
               </div>
+              <PlaceOrderButton cartId={cart._id}>Plcae order</PlaceOrderButton>
             </div>
             <div className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {cart.cartItems?.map((el, index: number) => {
