@@ -52,7 +52,7 @@ type AllCartProps = {
 //   await clearFromCartAction();
 // }
 export default function page({ cart }: AllCartProps) {
-  console.log("cartId", cart._id);
+  console.log("cartId", cart.cartItems);
 
   return (
     <div>
