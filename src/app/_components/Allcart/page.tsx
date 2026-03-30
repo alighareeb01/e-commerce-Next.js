@@ -93,7 +93,11 @@ export default function page({ cart }: AllCartProps) {
                   </p>
                 </div>
               </div>
-              <PlaceOrderButton cartId={cart._id}>Plcae order</PlaceOrderButton>
+              {cart.cartItems?.length && (
+                <PlaceOrderButton cartId={cart._id}>
+                  Plcae order
+                </PlaceOrderButton>
+              )}
             </div>
             <div className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {cart.cartItems?.map((el, index: number) => {

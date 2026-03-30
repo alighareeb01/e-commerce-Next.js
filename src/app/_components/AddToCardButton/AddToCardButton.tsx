@@ -24,7 +24,8 @@ export default function AddToCardButton({
         progress: true,
         position: "top-left",
         transition: "bounceIn",
-        icon: "",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6d432d" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>',
+
         sound: true,
       });
       setTimeout(() => {

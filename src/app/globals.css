@@ -50,9 +50,11 @@ html body {
   --toast-text-color: #fff5eb !important;
   --toast-close-color: #fff5eb !important;
   --toast-warning-color: #6d432d !important;
+  --toast-info-color: #6d432d !important;
 }
 :root {
 
+  
 
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
