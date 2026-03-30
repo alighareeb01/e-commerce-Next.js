@@ -39,7 +39,7 @@ export default async function Orders() {
   const token = await getMyToken();
 
   const res = await fetch(
-    "https://nti-e-commerce-backend-project.vercel.app/api/v1/orders",
+    "https://nti-e-commerce-backend-project.vercel.app/api/v1/orders?page=1&limit=50",
     {
       method: "GET",
       headers: {
