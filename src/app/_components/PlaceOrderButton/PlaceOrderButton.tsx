@@ -14,7 +14,7 @@ export default function PlaceOrderButton({
   //
 
   function goToCheckout() {
-    showToast.success("order placed successfully", {
+    showToast.success("going to checkout", {
       duration: 4000,
       progress: true,
       position: "top-left",

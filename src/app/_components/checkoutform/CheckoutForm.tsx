@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import PlaceOrderAction from "@/app/cartAction/PlcaeOrderAction";
+import { showToast } from "nextjs-toast-notify";
 
 export const checkoutSchema = z.object({
   shippingAddress: z.object({
@@ -90,10 +91,20 @@ export default function CheckoutForm({ cart }: CheckoutFormProps) {
     };
 
     const result = await PlaceOrderAction(body);
+
+    console.log(result, "kanye");
+
+    showToast.success("orderd plcaed 😊", {
+      duration: 4000,
+      progress: true,
+      position: "top-left",
+      transition: "slideInUp",
+      icon: "",
+      sound: true,
+    });
     setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    window.location.href = "/allorders";
+      window.location.href = `allorders`;
+    }, 4000);
   }
 
   return (
