@@ -14,12 +14,14 @@ import { Heart } from "lucide-react";
 import AddToCardButton from "../AddToCardButton/AddToCardButton";
 import AddToWishlistButton from "../AddToWishlistButton/AddToWishlistButton";
 import ViewDetails from "../ViewDetails/ViewDetails";
+// import { useState } from "react";
 
 type ProductCardProps = {
   product: ProductType;
 };
 
 export default function ProductCard({ product }: ProductCardProps) {
+ 
   return (
     <Card className="relative mx-auto w-full max-w-sm overflow-hidden rounded-[1.75rem] border border-[#7a5036]/12 bg-[rgba(255,248,240,0.92)] pt-0 text-[#3f2417] shadow-[0_18px_40px_rgba(90,53,35,0.1)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_26px_55px_rgba(90,53,35,0.15)] flex flex-col h-full">
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#4a2d1e]/55 via-transparent to-transparent opacity-80" />
@@ -55,12 +57,30 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
         </CardDescription>
       </CardHeader>
-      <CardFooter className="relative z-20 border-t border-[#7a5036]/10 bg-[rgba(246,230,214,0.72)] p-5 gap-2">
+      <CardFooter className=" relative z-20 border-t border-[#7a5036]/10 bg-[rgba(246,230,214,0.72)] p-5 gap-2">
         {/* <Button className="flex-1 bg-[#6d432d] text-[#fff5eb] shadow-[0_8px_20px_rgba(90,53,35,0.15)] hover:bg-[#7b4f36] hover:-translate-y-0.5 transition-all">
           Add to Cart
         </Button> */}
-
-        <AddToCardButton productId={product._id}>add to cart</AddToCardButton>
+        {/* <div className="flex items-center gap-2">
+          <label
+            htmlFor={`quantity-${product._id}`}
+            className="text-sm text-[#6d432d]"
+          >
+            Qty
+          </label>
+          <input
+            id={`quantity-${product._id}`}
+            type="number"
+            min={1}
+            max={product.stock}
+            value={qty}
+            onChange={(e) => setQty(Number(e.target.value))}
+            className="w-16 rounded-md border border-[#7a5036]/20 bg-[#fff5eb] px-2 py-1 text-center text-[#4a2d1e] outline-none"
+          />
+        </div> */}
+        <AddToCardButton productId={product._id} >
+          add to cart
+        </AddToCardButton>
         <AddToWishlistButton productId={product._id}>
           <Heart className="w-4 h-4" />
         </AddToWishlistButton>

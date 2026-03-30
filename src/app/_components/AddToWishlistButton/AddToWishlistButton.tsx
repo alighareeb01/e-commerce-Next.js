@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 
 import React from "react";
 import addToWishlistAction from "../wishlistAction/addToWishlistAction";
+import { showToast } from "nextjs-toast-notify";
 type ADdtoWushlistProps = {
   productId: string;
   children: React.ReactNode;
@@ -13,7 +14,29 @@ export default function AddToWishlistButton({
 }: ADdtoWushlistProps) {
   async function addToWishlist() {
     const data = await addToWishlistAction(productId);
-    console.log(data);
+    // console.log(data);
+    if (data == false) {
+      showToast.info("please login first and come back", {
+        duration: 4000,
+        progress: true,
+        position: "top-left",
+        transition: "bounceIn",
+        icon: "",
+        sound: true,
+      });
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 4000);
+    } else {
+      showToast.success("added to wishlist successfully", {
+        duration: 4000,
+        progress: true,
+        position: "top-left",
+        transition: "slideInUp",
+        icon: "",
+        sound: true,
+      });
+    }
   }
   return (
     <Button

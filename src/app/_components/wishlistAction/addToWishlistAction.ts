@@ -4,6 +4,9 @@ import getMyToken from "@/app/utils/getMyToken";
 
 export default async function addToWishlistAction(productId: string) {
   const token = await getMyToken();
+    if (!token) {
+      return false;
+    }
   const res = await fetch(
     "https://nti-e-commerce-backend-project.vercel.app/api/v1/wishlist",
     {

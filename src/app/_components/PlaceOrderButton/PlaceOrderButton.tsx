@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { showToast } from "nextjs-toast-notify";
 import React from "react";
 type PlaceOrderButtonProps = {
   cartId: string;
@@ -13,7 +14,17 @@ export default function PlaceOrderButton({
   //
 
   function goToCheckout() {
-    window.location.href = `/checkout?cartId=${cartId}`;
+    showToast.success("order placed successfully", {
+      duration: 4000,
+      progress: true,
+      position: "top-left",
+      transition: "slideInUp",
+      icon: "",
+      sound: true,
+    });
+    setTimeout(() => {
+      window.location.href = `/checkout?cartId=${cartId}`;
+    }, 4000);
   }
   return (
     <Button
