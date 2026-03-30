@@ -2,6 +2,7 @@ import React from "react";
 import ProductCard from "../ProductCard/page";
 import { ProductType } from "@/app/_models/products.type";
 
+
 type ProductItem = ProductType & {
   imageCover?: string | File | Array<string | File>;
 };
@@ -11,6 +12,8 @@ type AllproductProps = {
 };
 
 export default function Allproducts({ product }: AllproductProps) {
+  console.log("produceAli", product);
+
   return (
     <section className="py-4 pb-10 text-[#3f2417]">
       <div className="container mx-auto px-4">
