@@ -79,9 +79,9 @@ export default function Navbar() {
               <li>
                 <NavItem href="/Category">Categories</NavItem>
               </li>
-              <li>
+              {/* <li>
                 <NavItem href="/brands">Brands</NavItem>
-              </li>
+              </li> */}
               <li>
                 <NavItem href="/allorders">Orders</NavItem>
               </li>
@@ -163,11 +163,11 @@ export default function Navbar() {
                   Categories
                 </NavItem>
               </li>
-              <li>
+              {/* <li>
                 <NavItem href="/brands" onClick={() => setIsOpen(false)}>
                   Brands
                 </NavItem>
-              </li>
+              </li> */}
               <li>
                 <NavItem href="/allorders" onClick={() => setIsOpen(false)}>
                   My Orders

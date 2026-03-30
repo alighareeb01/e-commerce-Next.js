@@ -13,6 +13,7 @@ import {
 import { Heart } from "lucide-react";
 import AddToCardButton from "../AddToCardButton/AddToCardButton";
 import AddToWishlistButton from "../AddToWishlistButton/AddToWishlistButton";
+import ViewDetails from "../ViewDetails/ViewDetails";
 
 type ProductCardProps = {
   product: ProductType;
@@ -63,6 +64,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <AddToWishlistButton productId={product._id}>
           <Heart className="w-4 h-4" />
         </AddToWishlistButton>
+        <ViewDetails productId={product._id}>View product</ViewDetails>
       </CardFooter>
     </Card>
   );
