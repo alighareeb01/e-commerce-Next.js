@@ -12,7 +12,7 @@ export default async function Home() {
       <section className="py-10 text-[#3f2417]">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl font-bold tracking-tight text-[#4a2d1e] sm:text-5xl">
-            Welcome to Our Shop 🍫
+            Welcome to Our Shop
           </h1>
 
           <p className="mt-4 max-w-2xl mx-auto text-sm leading-7 text-[#7b5843] sm:text-base">

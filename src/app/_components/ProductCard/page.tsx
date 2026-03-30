@@ -22,12 +22,19 @@ type ProductCardProps = {
 
 export default function ProductCard({ product }: ProductCardProps) {
  
+  console.log(product);
+  const fileName = product.cover?.split("/").pop();
+  console.log("filem", fileName);
+
+  // const imageSrc = fileName ? `/product/${fileName}` : "/def.jpg";
+
   return (
     <Card className="relative mx-auto w-full max-w-sm overflow-hidden rounded-[1.75rem] border border-[#7a5036]/12 bg-[rgba(255,248,240,0.92)] pt-0 text-[#3f2417] shadow-[0_18px_40px_rgba(90,53,35,0.1)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_26px_55px_rgba(90,53,35,0.15)] flex flex-col h-full">
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#4a2d1e]/55 via-transparent to-transparent opacity-80" />
 
       <img
-        src="/def.jpg"
+        src={fileName}
+        // src="/def.jpg"
         alt={product.name}
         className="relative aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
       />
@@ -78,9 +85,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="w-16 rounded-md border border-[#7a5036]/20 bg-[#fff5eb] px-2 py-1 text-center text-[#4a2d1e] outline-none"
           />
         </div> */}
-        <AddToCardButton productId={product._id} >
-          add to cart
-        </AddToCardButton>
+        <AddToCardButton productId={product._id}>add to cart</AddToCardButton>
         <AddToWishlistButton productId={product._id}>
           <Heart className="w-4 h-4" />
         </AddToWishlistButton>

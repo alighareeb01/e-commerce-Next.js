@@ -1,4 +1,5 @@
 import { CategoryType } from "@/app/_models/category.type";
+import getMyToken from "@/app/utils/getMyToken";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,15 +12,35 @@ import React from "react";
 
 type categoryProps = {
   category: CategoryType;
+  image: string;
 };
 
-export default function Categorycard({ category }: categoryProps) {
+export default async function Categorycard({ category, image }: categoryProps) {
+  console.log("catasd", category._id);
+
+  // const token = await getMyToken();
+  // console.log("to", token);
+
+  // const res = await fetch(
+  //   `https://nti-e-commerce-backend-project.vercel.app/api/v1/category/${category._id}`,
+  //   {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   },
+  // );
+  // const data = await res.json();
+  // console.log("from here toto", data);
+
   return (
     <Card className="relative mx-auto w-full max-w-sm overflow-hidden rounded-[1.75rem] border border-[#7a5036]/12 bg-[rgba(255,248,240,0.92)] pt-0 text-[#3f2417] shadow-[0_18px_40px_rgba(90,53,35,0.1)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_26px_55px_rgba(90,53,35,0.15)] flex flex-col h-full">
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#4a2d1e]/55 via-transparent to-transparent opacity-80" />
 
       <img
-        src="/def.jpg"
+        // src="/def.jpg"
+        src={image}
         alt={category.name}
         className="relative aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
       />

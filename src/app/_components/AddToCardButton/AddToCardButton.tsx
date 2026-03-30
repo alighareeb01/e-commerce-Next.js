@@ -1,3 +1,4 @@
+"use client";
 import addToCartAction from "@/app/cartAction/addToCartAction";
 import { Button } from "@/components/ui/button";
 import React from "react";

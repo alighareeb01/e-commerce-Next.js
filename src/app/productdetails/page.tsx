@@ -1,4 +1,5 @@
 import React from "react";
+import AddToCardButton from "../_components/AddToCardButton/AddToCardButton";
 
 type detProps = {
   searchParams: Promise<{
@@ -49,14 +50,19 @@ export default async function ProductDetails({ searchParams }: detProps) {
   const result: ProductDetailsResponse = await res.json();
   const product = result.data;
 
+  console.log("toto", product);
+  const fileName = product.cover?.split("/").pop();
+  const imageFileNames = product.images.map((image) => image.split("/").pop());
+  console.log("tototo", fileName);
+
   return (
     <section className="min-h-screen bg-[linear-gradient(180deg,#fff8f0_0%,#f6eadf_52%,#efddcf_100%)] px-4 py-10 text-[#3f2417]">
       <div className="container mx-auto max-w-6xl">
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-5">
-            <div className="overflow-hidden rounded-[2rem] border border-[#7a5036]/12 bg-[rgba(255,248,240,0.9)] shadow-[0_20px_60px_rgba(90,53,35,0.08)]">
+            <div className="mx-auto w-full object-cover overflow-hidden rounded-[2rem] border border-[#7a5036]/12 bg-[rgba(255,248,240,0.9)] shadow-[0_20px_60px_rgba(90,53,35,0.08)]">
               <img
-                src="/def.jpg"
+                src={fileName}
                 alt={product.name}
                 className="h-[420px] w-full object-cover"
               />
@@ -69,7 +75,7 @@ export default async function ProductDetails({ searchParams }: detProps) {
                   className="overflow-hidden rounded-[1.5rem] border border-[#7a5036]/12 bg-[rgba(255,248,240,0.88)] shadow-[0_10px_30px_rgba(90,53,35,0.08)]"
                 >
                   <img
-                    src="/def.jpg"
+                    src={imageFileNames[index]}
                     alt={`${product.name} ${index + 1}`}
                     className="h-32 w-full object-cover"
                   />
@@ -134,6 +140,7 @@ export default async function ProductDetails({ searchParams }: detProps) {
               <h2 className="text-lg font-semibold text-[#4a2d1e]">
                 Product Info
               </h2>
+
               <div className="mt-4 space-y-3 text-sm text-[#7b5843]">
                 <p>
                   <span className="font-semibold text-[#4a2d1e]">
@@ -153,6 +160,9 @@ export default async function ProductDetails({ searchParams }: detProps) {
                   </span>{" "}
                   {new Date(product.updatedAt).toLocaleString()}
                 </p>
+                <AddToCardButton productId={product._id}>
+                  add to cart
+                </AddToCardButton>
               </div>
             </div>
           </div>

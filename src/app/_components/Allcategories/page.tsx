@@ -12,6 +12,13 @@ type CategoryProps = {
   category: CategoryItem[];
 };
 
+const localImages = [
+  "/cat-1.jpg",
+  "/cat-2.jpg",
+  "/cat-3.jpg",
+  "/cat-4.jpg",
+  "/cat-5.jpg",
+];
 export default function Allcategories({ category }: CategoryProps) {
   return (
     <section className="py-4 pb-10 text-[#3f2417]">
@@ -40,7 +47,13 @@ export default function Allcategories({ category }: CategoryProps) {
           </div>
           <div className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {category.map((el, index: number) => {
-              return <Categorycard key={el._id ?? index} category={el} />;
+              return (
+                <Categorycard
+                  key={el._id ?? index}
+                  category={el}
+                  image={localImages[index]}
+                />
+              );
             })}
           </div>
         </div>
