@@ -12,13 +12,13 @@ This repository contains the **frontend only**. It integrates with a hosted REST
 
 ## 📸 Screenshots
 
-### 🏠 Home Page
+### 🏠 Register Page
 ![Home](./public/screenshots/one.png)
 
-### 🛍️ Products Page
+### 🛍️ Categories Page
 ![Products](./public/screenshots/two.png)
 
-### 📦 Product Details
+### 📦 Login Page
 ![Product Details](./public/screenshots/three.png)
 
 
