@@ -16,7 +16,7 @@ export default function AddToCardButton({
   //
 
   async function addToCart() {
-    const data = await addToCartAction(productId);
+    const data = await addToCartAction(productId,1);
     // console.log("add to cart data", data);
     if (data == false) {
       showToast.info("please login first and come back", {
