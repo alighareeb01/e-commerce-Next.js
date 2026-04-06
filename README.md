@@ -9,14 +9,18 @@ This repository contains the **frontend only**. It integrates with a hosted REST
 
 ---
 
-## 🎯 What Problem It Solves
-The app provides a customer-facing shopping experience with:
 
-- Account registration and login
-- Product discovery
-- Cart and wishlist management
-- Checkout and order placement
-- Order history viewing
+## 📸 Screenshots
+
+### 🏠 Home Page
+![Home](./public/screenshots/one.png)
+
+### 🛍️ Products Page
+![Products](./public/screenshots/two.png)
+
+### 📦 Product Details
+![Product Details](./public/screenshots/three.png)
+
 
 ---
 
