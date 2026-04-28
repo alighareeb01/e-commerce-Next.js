@@ -27,41 +27,45 @@ export default function Login() {
     resolver: zodResolver(loginSchema),
   });
 
-  async function loginFun(data) {
-    setIsLoading(true);
-    // console.log(data);
 
-    let res = await signIn("credentials", {
-      email: data.email,
-      password: data.password,
-      redirect: false,
-      callbackUrl: "/",
-    });
+type LoginFormData = {
+  email: string;
+  password: string;
+};
+
+async function loginFun(data: LoginFormData) {
+  setIsLoading(true);
+  // console.log(data);
+
+  let res = await signIn("credentials", {
+    email: data.email,
+    password: data.password,
+    redirect: false,
+    callbackUrl: "/",
+  });
+  if (res?.ok) {
     console.log(res.ok);
-    if (res.ok == true) {
-      router.push("/shop");
-      setIsLoading(false);
-    } else {
-      console.log(res, "res");
-      console.log(res.error, "res error");
-      setIsLoading(false);
-    }
-
-    // try {
-    //   const res = await axios.post(
-    //     "https://nti-ecommerce.vercel.app/api/v1/auth/signIn",
-    //     data,
-    //   );
-
-    //   console.log(res.data);
-    //   localStorage.setItem("loginToken", res.data.token);
-    //   router.push("/shop");
-    // } catch (err) {
-    //   console.log(err.response?.data || err.message);
-    // } finally {
-    //   setIsLoading(false);
-    // }
+    router.push("/shop");
+    setIsLoading(false);
+  } else {
+    setIsLoading(false);
   }
+
+  // try {
+  //   const res = await axios.post(
+  //     "https://nti-ecommerce.vercel.app/api/v1/auth/signIn",
+  //     data,
+  //   );
+
+  //   console.log(res.data);
+  //   localStorage.setItem("loginToken", res.data.token);
+  //   router.push("/shop");
+  // } catch (err) {
+  //   console.log(err.response?.data || err.message);
+  // } finally {
+  //   setIsLoading(false);
+  // }
+}
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-[#fdf6f0] px-4">

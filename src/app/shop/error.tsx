@@ -1,6 +1,11 @@
 "use client";
 
-export default function Error({ error, reset }) {
+type ErrorProps = {
+  error: Error & { digest?: string };
+  reset: () => void;
+};
+
+export default function Error({ error, reset }: ErrorProps) {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#fdf6f0] text-[#4a2d1e]">
       <h2 className="text-2xl font-bold mb-4">Something went wrong 😢</h2>

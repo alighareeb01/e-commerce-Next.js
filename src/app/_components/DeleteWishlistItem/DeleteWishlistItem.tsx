@@ -2,7 +2,14 @@
 import deleteFromWishListAction from "@/app/cartAction/deleteFromWishListAction";
 import { Button } from "@/components/ui/button";
 import React from "react";
-export default function DeleteWishlistItem({ itemId }) {
+
+type DeleteWishlistItemProps = {
+  itemId: string;
+};
+
+export default function DeleteWishlistItem({
+  itemId,
+}: DeleteWishlistItemProps) {
   async function handleDelete() {
     await deleteFromWishListAction(itemId);
     window.location.href = "/wishlist";

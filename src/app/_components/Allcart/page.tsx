@@ -45,14 +45,12 @@ type CartResponseType = {
 };
 
 type AllCartProps = {
-  cart: CartResponseType;
+  cart: CartResponseType | false | null;
 };
 
-// async function handleClear() {
-//   await clearFromCartAction();
-// }
-export default function page({ cart }: AllCartProps) {
-  console.log("cartId", cart.cartItems);
+export default function Page({ cart }: AllCartProps) {
+  const cartData = cart && "data" in cart ? cart.data : null;
+  const cartItems = cartData?.cartItems || [];
 
   return (
     <div>
@@ -66,45 +64,48 @@ export default function page({ cart }: AllCartProps) {
                 </h2>
 
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-[#7b5843] sm:text-base">
-                  {cart.cartItems
+                  {cartItems.length
                     ? "Review your items before checkout. ❤️"
                     : "nothing in your cart 😭"}
                 </p>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-[#7a5036]/12 bg-[rgba(255,248,240,0.9)] p-5 shadow-[0_10px_30px_rgba(90,53,35,0.08)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(90,53,35,0.12)]">
+                <div className="rounded-2xl border border-[#7a5036]/12 bg-[rgba(255,248,240,0.9)] p-5 shadow-[0_10px_30px_rgba(90,53,35,0.08)]">
                   <h2 className="text-lg font-semibold text-[#7b5843]">
                     Total Items
                   </h2>
 
                   <p className="mt-2 text-3xl font-bold text-[#4a2d1e]">
-                    {cart.cartItems?.length || 0}
+                    {cartItems.length}
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-[#7a5036]/12 bg-[rgba(255,248,240,0.9)] p-5 shadow-[0_10px_30px_rgba(90,53,35,0.08)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(90,53,35,0.12)]">
+                <div className="rounded-2xl border border-[#7a5036]/12 bg-[rgba(255,248,240,0.9)] p-5 shadow-[0_10px_30px_rgba(90,53,35,0.08)]">
                   <h2 className="text-lg font-semibold text-[#7b5843]">
                     Total Price
                   </h2>
 
                   <p className="mt-2 text-3xl font-bold text-[#4a2d1e]">
-                    ${cart?.totalPrice || 0}
+                    ${cartData?.totalPrice || 0}
                   </p>
                 </div>
               </div>
-              {cart.cartItems?.length && (
-                <PlaceOrderButton cartId={cart._id}>
-                  Plcae order
+
+              {cartItems.length > 0 && cartData?._id && (
+                <PlaceOrderButton cartId={cartData._id}>
+                  Place order
                 </PlaceOrderButton>
               )}
             </div>
+
             <div className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {cart.cartItems?.map((el, index: number) => {
+              {cartItems.map((el, index: number) => {
                 return <CartCard key={el._id ?? index} cart={el} />;
               })}
             </div>
-            {cart.cartItems && <ClearCartButton />}
+
+            {cartItems.length > 0 && <ClearCartButton />}
           </div>
         </div>
       </section>

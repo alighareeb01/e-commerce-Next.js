@@ -40,14 +40,15 @@ type CartCardProps = {
 export default function CartCard({ cart }: CartCardProps) {
   console.log("cartasdasds", cart);
 
-  const prodImage = cart.product.cover.split("/").pop();
+  const prodImage = cart.product.cover?.split("/").pop();
   console.log(prodImage);
 
   async function handleDelete() {
+    if (!cart._id) return;
+
     await deleteFromCartAction(cart._id);
     window.location.href = "/cart";
   }
-
   return (
     <Card className="relative mx-auto w-full max-w-sm overflow-hidden rounded-[1.75rem] border border-[#7a5036]/12 bg-[rgba(255,248,240,0.92)] pt-0 text-[#3f2417] shadow-[0_18px_40px_rgba(90,53,35,0.1)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_26px_55px_rgba(90,53,35,0.15)] flex flex-col h-full">
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#4a2d1e]/55 via-transparent to-transparent opacity-80" />

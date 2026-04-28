@@ -9,4 +9,8 @@ export interface ProductType {
   brand: string;
   imageCover?: string | File;
   images?: Array<string | File>;
+  cover?: string;
+  name?: string;
+  sold?: number;
+  ratingAverage?: number;
 }

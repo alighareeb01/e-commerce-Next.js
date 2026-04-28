@@ -60,7 +60,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <div className="flex items-center justify-between text-xs text-[#7b5843]">
             <span>Stock: {product.stock}</span>
             <span>Sold: {product.sold}</span>
-            {product.ratingAverage && <span>⭐ {product.ratingAvg}</span>}
+            {product.ratingAverage && <span>⭐ {product.ratingAverage}</span>}
           </div>
         </CardDescription>
       </CardHeader>
@@ -85,11 +85,17 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="w-16 rounded-md border border-[#7a5036]/20 bg-[#fff5eb] px-2 py-1 text-center text-[#4a2d1e] outline-none"
           />
         </div> */}
-        <AddToCardButton productId={product._id}>add to cart</AddToCardButton>
-        <AddToWishlistButton productId={product._id}>
-          <Heart className="w-4 h-4" />
-        </AddToWishlistButton>
-        <ViewDetails productId={product._id}>View product</ViewDetails>
+        {product._id && (
+          <>
+            <AddToCardButton productId={product._id}>
+              add to cart
+            </AddToCardButton>
+            <AddToWishlistButton productId={product._id}>
+              <Heart className="w-4 h-4" />
+            </AddToWishlistButton>
+            <ViewDetails productId={product._id}>View product</ViewDetails>
+          </>
+        )}
       </CardFooter>
     </Card>
   );

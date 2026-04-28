@@ -1,6 +1,9 @@
 "use server";
 import getMyToken from "../utils/getMyToken";
-export default async function addToCartAction(productId: string, qty: number) {
+export default async function addToCartAction(
+  productId: string,
+  qty: number = 1,
+) {
   const token = await getMyToken();
   if (!token) {
     return false;

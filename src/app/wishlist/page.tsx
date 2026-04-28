@@ -46,7 +46,7 @@ export default async function page() {
               </div>
             </div>
             <div className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {wishlist.data.map((el, index) => {
+              {wishlist.data.map((el: any, index: number) => {
                 return (
                   <Card
                     key={index}

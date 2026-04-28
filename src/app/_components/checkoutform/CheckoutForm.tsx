@@ -81,8 +81,8 @@ export default function CheckoutForm({ cart }: CheckoutFormProps) {
 
     setIsLoading(true);
     const body = {
-      items: cart.map((item) => ({
-        productId: item.product._id,
+      items: cart.items.map((item) => ({
+        productId: item.productId,
         quantity: item.quantity,
       })),
       shippingAddress: data.shippingAddress,

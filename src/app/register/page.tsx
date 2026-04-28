@@ -20,6 +20,8 @@ const signuPSchema = z.object({
     .max(50, "Password must be at most 50 characters"),
 });
 
+type SignupFormData = z.infer<typeof signuPSchema>;
+
 export default function register() {
   const router = useRouter();
   let [isLoading, setIsLoading] = useState(false);
@@ -32,7 +34,7 @@ export default function register() {
     resolver: zodResolver(signuPSchema),
   });
 
-  async function signupFun(data) {
+  async function signupFun(data: SignupFormData) {
     setIsLoading(true);
     // console.log(data);
     try {
@@ -47,7 +49,11 @@ export default function register() {
       localStorage.setItem("signupToken", res.data.token);
       router.push("/login");
     } catch (err) {
-      console.log(err.response?.data || err.message);
+      if (axios.isAxiosError(err)) {
+        console.log(err.response?.data || err.message);
+      } else {
+        console.log("Unexpected error:", err);
+      }
     } finally {
       setIsLoading(false);
     }
